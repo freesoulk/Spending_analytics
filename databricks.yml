@@ -1,0 +1,18 @@
+# Spending Analytics — Databricks bundle configuration
+# Deployed to the workspace by the GitHub Actions workflow in
+# .github/workflows/deploy.yml on every push to main.
+
+bundle:
+  name: spending_analytics
+
+# Uncomment when resource files are added:
+# include:
+#   - resources/*.yml
+
+targets:
+  dev:
+    default: true
+    mode: development
+    workspace:
+      # Deployed under the Git folder in the workspace
+      root_path: /Workspace/Users/kadaves412@gmail.com/.bundle/${bundle.name}/dev

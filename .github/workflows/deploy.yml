@@ -1,0 +1,41 @@
+# Deploys the Databricks bundle (databricks.yml) to the workspace
+# on every push to main, or manually via workflow_dispatch.
+#
+# Required repository secret (GitHub → Settings → Secrets and variables → Actions):
+#   DATABRICKS_TOKEN — a Databricks access token (PAT) for this workspace
+#
+# Create the PAT in Databricks: Settings → Developer → Access tokens.
+
+name: Deploy to Databricks
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  DATABRICKS_HOST: https://dbc-dc0b2ff1-4740.cloud.databricks.com
+
+jobs:
+  deploy:
+    name: Validate and deploy bundle
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Validate bundle
+        run: databricks bundle validate --target dev
+        env:
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+      - name: Deploy bundle
+        run: databricks bundle deploy --target dev
+        env:
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}

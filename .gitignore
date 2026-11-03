@@ -1,0 +1,11 @@
+# Databricks bundle local state
+.bundle/
+.databricks/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Secrets
+.env
