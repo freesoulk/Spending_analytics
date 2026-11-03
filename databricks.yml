@@ -5,9 +5,8 @@
 bundle:
   name: spending_analytics
 
-# Uncomment when resource files are added:
-# include:
-#   - resources/*.yml
+include:
+  - resources/*.yml
 
 targets:
   dev:

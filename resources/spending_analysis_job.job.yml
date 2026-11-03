@@ -1,0 +1,9 @@
+resources:
+  jobs:
+    spending_analysis_job:
+      name: spending_analysis_job
+      tasks:
+        - task_key: main
+          notebook_task:
+            notebook_path: ../src/spending_analysis.ipynb
+      # No schedule (manual trigger) - add a 'schedule' block to automate.
